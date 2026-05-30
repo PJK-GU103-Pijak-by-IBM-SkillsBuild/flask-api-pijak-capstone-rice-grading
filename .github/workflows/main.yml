@@ -9,20 +9,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: DOCKER_HUB
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE
     - uses: actions/checkout@v3
     - name: Check Docker Hub credentials
       if: github.event_name == 'push'
       run: |
-        if [ -z "${{ vars.DOCKER_HUB_USERNAME }}" ]; then
+        if [ -z "${{ vars.DOCKER_HUB_USERNAME_ARY }}" ]; then
           echo "DOCKER_HUB_USERNAME variable is empty or not available"
           exit 1
         fi
 
-        if [ -z "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" ]; then
-          echo "DOCKER_HUB_ACCESS_TOKEN secret is empty or not available"
+        if [ -z "${{ secrets.DOCKER_HUB_ACCESS_TOKEN_ARY }}" ]; then
+          echo "DOCKER_HUB_ACCESS_TOKEN_ARY secret is empty or not available"
           exit 1
         fi
     - name: Log in to Docker Hub
@@ -34,11 +33,11 @@ jobs:
     - name: Build Docker image
       run: |
         docker build \
-        -t ${{ vars.DOCKER_HUB_USERNAME }}/api-rice-grading-flask:latest \
-        -t ${{ vars.DOCKER_HUB_USERNAME }}/api-rice-grading-flask:${{ github.sha }} \
+        -t ${{ vars.DOCKER_HUB_USERNAME_ARY }}/api-rice-grading-flask:latest \
+        -t ${{ vars.DOCKER_HUB_USERNAME_ARY }}/api-rice-grading-flask:${{ github.sha }} \
         .
     - name: Push Docker Image
       if: github.event_name == 'push'
       run: |
-        docker push ${{ vars.DOCKER_HUB_USERNAME }}/api-rice-grading-flask:latest
-        docker push ${{ vars.DOCKER_HUB_USERNAME }}/api-rice-grading-flask:${{ github.sha }}
+        docker push ${{ vars.DOCKER_HUB_USERNAME_ARY }}/api-rice-grading-flask:latest
+        docker push ${{ vars.DOCKER_HUB_USERNAME_ARY }}/api-rice-grading-flask:${{ github.sha }}
