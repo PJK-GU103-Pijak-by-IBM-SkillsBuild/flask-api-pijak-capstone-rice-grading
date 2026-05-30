@@ -1,13 +1,17 @@
 import tensorflow as tf
-from app.config import Config
+import os
+from huggingface_hub import hf_hub_download
 
 _model = None
 
 def load_model():
     global _model
     if _model is None:
-        print(f"[Model] Loading from: {Config.MODEL_PATH}")
-        loaded = tf.saved_model.load(Config.MODEL_PATH)
-        _model = loaded.signatures["serving_default"]
-        print("[Model] Loaded successfully.")
+        print("Downloading model from HuggingFace Hub...")
+        model_path = hf_hub_download(
+            repo_id=f"{os.getenv('REPO_ID')}",
+            filename=f"{os.getenv('MODEL_FILENAME')}"
+        )
+        _model = tf.keras.models.load_model(model_path)
+        print("Model loaded!")
     return _model

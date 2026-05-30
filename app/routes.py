@@ -52,9 +52,9 @@ def predict():
     # --- Inferensi ---
     try:
         model = load_model()
-        output = model(image_tensor)
-        # predictions = model(image_tensor, training=False)
-        probabilities = list(output.values())[0].numpy()[0]
+        output = model(image_tensor, training=False)
+        probabilities = output.numpy()[0]
+
 
         predicted_index = int(np.argmax(probabilities))
         label = Config.CLASS_LABELS[predicted_index]

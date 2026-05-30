@@ -1,0 +1,9 @@
+services:
+  app:
+    image: flask-api-rice-grading:1.1        # image yang sudah ada
+    container_name: flask-rice-grading
+    ports:
+      - "${PORT}:${PORT}"
+    env_file:
+      - .env
+    restart: unless-stopped
