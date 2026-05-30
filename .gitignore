@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Flask
+instance/
+.env
+*.cfg
+
+# ML & Model artifacts
+*.h5
+*.keras
+*.pkl
+*.joblib
+*.onnx
+*.pt
+*.pth
+models/
+checkpoints/
+
+# Dataset & uploads
+data/
+datasets/
+uploads/
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.zip
+*.tar.gz
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
