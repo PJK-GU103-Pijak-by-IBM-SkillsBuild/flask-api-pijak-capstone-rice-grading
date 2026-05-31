@@ -1,17 +1,20 @@
-import tensorflow as tf
+import numpy as np
 import os
 from huggingface_hub import hf_hub_download
 
-_model = None
+_interpreter = None
 
 def load_model():
-    global _model
-    if _model is None:
+    global _interpreter
+    if _interpreter is None:
         print("Downloading model from HuggingFace Hub...")
         model_path = hf_hub_download(
             repo_id=f"{os.getenv('REPO_ID')}",
-            filename=f"{os.getenv('MODEL_FILENAME')}"
+            filename=f"{os.getenv('MODEL_FILENAME')}"  # ganti ke .tflite
         )
-        _model = tf.keras.models.load_model(model_path)
+
+        from ai_edge_litert import interpreter as tflite
+        _interpreter = tflite.Interpreter(model_path=model_path)
+        _interpreter.allocate_tensors()
         print("Model loaded!")
-    return _model
+    return _interpreter
