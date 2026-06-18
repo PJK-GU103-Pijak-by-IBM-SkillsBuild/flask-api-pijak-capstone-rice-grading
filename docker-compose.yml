@@ -1,6 +1,6 @@
 services:
   app:
-    image: flask-api-rice-grading:1.1        # image yang sudah ada
+    image: arykurnia/api-rice-grading-flask:latest        # image yang sudah ada
     container_name: flask-rice-grading
     ports:
       - "${PORT}:${PORT}"
